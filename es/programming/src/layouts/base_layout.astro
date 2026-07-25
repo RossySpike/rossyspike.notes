@@ -15,12 +15,42 @@ const {pageTitle} = Astro.props
     <title>{pageTitle}</title>
 	</head>
 	<body>
-    <h1>{pageTitle}</h1>
     <Header />
-    <slot/>
-    <Footer/>
+    <div id='container'>
+      <aside>
+        <p>indice</p>
+      </aside>
+      <main>
+        <h1>{pageTitle}</h1>
+        <slot/>
+        <Footer/>
+      </main>
+    </div>
     <script>
       import "../scripts/menu.js";
     </script>
 	</body>
 </html>
+<style>
+body {
+    margin-left:0;
+
+}
+  /* TODO: Aca agregar codigo para que la barra lateral se pueda quitar */
+@media (width >= 50rem){
+
+  #container {
+    display: flex;
+    flex-wrap: nowrap;
+
+    & > aside {
+      width: 20%;
+    }
+  }
+}
+@media (width < 50rem){
+  #container > aside {
+    display: none;
+  }
+}
+</style>

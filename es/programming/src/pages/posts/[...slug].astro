@@ -1,4 +1,5 @@
 ---
+import '../../styles/global.css'
 import { getCollection, render } from 'astro:content';
 // importar nuestro layout de post
 import MarkdownPostLayout from '../../layouts/markdown_post_layout.astro';
@@ -14,6 +15,6 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 <!-- renderizar el contenido -->
-<MarkdownPostLayout frontmatter={post.data}>
-  <Content />
+<MarkdownPostLayout  frontmatter={post.data}>
+  <Content  class='typography'/>
 </MarkdownPostLayout>
