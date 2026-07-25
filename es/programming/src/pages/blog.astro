@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/base_layout.astro';
+import '../styles/global.css';
+import BlogPost from '../components/blogpost.astro';
+import {getCollection} from 'astro:content';
+const allPosts = await getCollection("blog");
+const pageTitle = 'Blog sobre programacion'
+
+---
+<BaseLayout pageTitle = {pageTitle}>
+  <p>Hola!.</p>
+  <ul>
+    {allPosts.map((post:any)=><BlogPost url={post.url} title={post.frontmatter.title} />)}
+  </ul>
+</BaseLayout>

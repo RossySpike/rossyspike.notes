@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+// importar nuestro layout de post
+import MarkdownPostLayout from '../../layouts/markdown_post_layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id }, props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<!-- renderizar el contenido -->
+<MarkdownPostLayout frontmatter={post.data}>
+  <Content />
+</MarkdownPostLayout>
