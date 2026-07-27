@@ -9,7 +9,9 @@ const pubDate = new Date(frontmatter.pubDate);
 </div>
 <p>Escrito por {frontmatter.author} | {pubDate.toLocaleDateString()}</p>
 <p><em>{frontmatter.description}</em></p>
-<slot />
+<div class='container'>
+  <slot />
+</div>
 </BaseLayout>
 <style>
   a {
@@ -28,6 +30,9 @@ const pubDate = new Date(frontmatter.pubDate);
     padding: .5em 1em;
     font-size: 1.15em;
     background-color: #F8FCFD;
+  }
+  .container :global(code) {
+    white-space:pre-wrap;
   }
 </style>
 
