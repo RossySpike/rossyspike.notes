@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "add_to_collection": "npx tsx ./tools/post_metadata_generator/main.ts"
   },
   "dependencies": {
     "astro": "^7.1.3",
