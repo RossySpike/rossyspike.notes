@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
+import BlogPost from './blogpost.astro'
+const posts =  await getCollection('blog');
+const contents = new Map();
+( posts.sort((postA:CollectionEntry<'blog'>, postB:CollectionEntry<'blog'>) => parseInt( postA.data.category.split('-')[0] ) - parseInt(postB.data.category.split('-')[0])) ).forEach((post:CollectionEntry<'blog'>)=>{
+const category = post.data.category.split('-')[1];
+if (!contents.has(category)){
+contents.set(category, [])
+}
+contents.get(category).push(post);
+})
+---
+<div>
+  <ul id='category-list'>
+    {[... contents].map(([ category, post ])=>(
+
+    <li>
+      { category }
+      <ul id='post-list'>
+        {post.sort((postA:CollectionEntry<'blog'>, postB:CollectionEntry<'blog'>) => parseInt( postA.id.split('-')[0] ) - parseInt(postB.id.split('-')[0])).map((p:CollectionEntry<'blog'>)=> <BlogPost url=`/posts/${p.id}` title={p.data.title}/> )}
+      </ul>
+    </li>
+    )
+    )}
+  </ul>
+</div>
+<style>
+  #category-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.25rem;
+
+  }
+  #post-list  {
+      font-size: .875rem;
+  }
+</style>
