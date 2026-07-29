@@ -17,7 +17,7 @@ contents.get(category).push(post);
     {[... contents].map(([ category, post ])=>(
 
     <li>
-      <span>{ category } </span>
+      <span>{ category[0].toUpperCase() + category.slice(1) }: </span>
       <ul id='post-list'>
         {post.sort((postA:CollectionEntry<'blog'>, postB:CollectionEntry<'blog'>) => parseInt( postA.id.split('-')[0] ) - parseInt(postB.id.split('-')[0])).map((p:CollectionEntry<'blog'>)=> <BlogPost url=`/posts/${p.id}` title={p.data.title}/> )}
       </ul>
@@ -31,10 +31,8 @@ contents.get(category).push(post);
     list-style-type: none;
     padding: 0;
     margin: 0;
-    font-size: 1.25rem;
 
   }
   #post-list  {
-      font-size: .875rem;
   }
 </style>
