@@ -20,8 +20,9 @@ const {pageTitle} = Astro.props
       <Header id='header' />
     </header>
     <div id='container'>
-      <aside>
-        <p>indice</p>
+      <aside class='index'>
+        <p style='margin:0;'>indice</p>
+        <hr/>
         <ContentList />
       </aside>
       <main>
@@ -59,7 +60,7 @@ aside{
   padding: 10px;
   position: fixed;
   overflow-y:scroll;
-  inset-block: 4rem 0; /* TODO: $1 a var */
+      inset-block: 3rem 0; /* TODO: $1 a var */
 }
 aside :global(#category-list){
   
@@ -82,6 +83,7 @@ main {
     & > aside {
       width: 20%;
       max-width: 170px;
+      inset-block: 4rem 0; /* TODO: $1 a var */
     }
     
   }
@@ -91,6 +93,7 @@ main {
   }
 }
 @media (width < 50rem){
+  
   #container > aside {
     display: none;
   }

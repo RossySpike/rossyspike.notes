@@ -3,23 +3,30 @@ import Navigation from './navigation.astro'
 import Menu from './menu.astro'
 ---
 <header>
-  <img src='https://avatars.githubusercontent.com/u/149632249?v=4'/>
-  <nav>
-    <Navigation/>
-    <Menu/>
-  </nav>
+  <div>
+    <img src='https://avatars.githubusercontent.com/u/149632249?v=4'/>
+    <nav>
+      <Navigation/>
+    </nav>
+  </div>
+  <Menu/>
 </header>
 <style>
   header {
     display: flex;
-    align-items: center;
+    padding:5px;
+    justify-content: space-between;
   }
   img {
     max-height: 100%;
     max-width:2rem;
     margin:0;
   }
-  nav {
-    display: flex;
+  div{
+    display:flex;
+    align-items: center;
+    gap:5px;
+    justify-content: left;
+
   }
 </style>
