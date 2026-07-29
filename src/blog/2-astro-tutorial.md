@@ -97,7 +97,7 @@ Para crear publicaciones o entradas en el blog se usan archivos `.md` (:DDDD)
 3. Igual que en el item anterior si visito una url, en este caso `url/posts/1-introduccion` puedo visualizar el contenido
    OJO: Astro ofrece metadata usando `frontmatter` para declarar informacion sobre la aplicacion
 
-```md
+```yaml
 ---
 title: "Mi primera publicación en el blog"
 pubDate: 2022-07-01
@@ -122,7 +122,7 @@ Astro extiende los archivos html basicos, un ejemplo lo podemos ver cuando agreg
 
 1. En el archivo `about.astro` agregare lo siguiente al inicio del archivo
 
-```Astro
+```astro
 ---
 const pageTitle = 'About';
 ---
@@ -130,7 +130,7 @@ const pageTitle = 'About';
 
 2. Luego dentro de la etiqueta `<head>` agregare lo siguiente
 
-```Astro
+```astro
 <head>
 ...
 <title>{pageTitle}</title>
@@ -143,7 +143,7 @@ Basicamente Astro permite declarar expresiones de JS
 
 Para aplicar estilos se crea la etiqueta `<styles>` dentro de `<head>` y puedes aplicar estilos, a esto lo puedes combinar con lo antes mencionado. Para hacer referencia a variables dentro de la etiqueta de `<styles>` debes usar la directiva:
 
-```Astro
+```astro
 <styles define:vars={ {acaVanTusVariables} }>
 ...
 <!-- Se acceden usando tag: var(tuVariable) -->
@@ -156,7 +156,7 @@ Para aplicar estilos se crea la etiqueta `<styles>` dentro de `<head>` y puedes 
 2. Declarar los estilos deseados
    Para usarlo dentro de una pagina se debe importar usando la _ruta relativa_
 
-```Astro
+```astro
 ---
 import '../styles/global.css'
 ---
@@ -175,7 +175,7 @@ Los componentes son piezas de codigo que pueden ser reutilizadas, en este caso, 
 1. Crear archivo `src/components/navigation.astro`
 2. Escribir el contenido del archivo:
 
-```Astro
+```astro
 ---
 ---
 <a href="/">Inicio</a>
@@ -186,7 +186,7 @@ Los componentes son piezas de codigo que pueden ser reutilizadas, en este caso, 
 
 3. Para utilizarlo, simplemente se importa en el archivo `.astro` a usar, por ejemplo en el `index.astro`
 
-```Astro
+```astro
 ---
 import Navigation from '../components/navigation.astro'
 const pageTitle = 'Notes'
@@ -207,7 +207,7 @@ Siguiendo con el tutorial de la pagina, voy a hacer un **footer** con lo aprendi
 
 Queda de la siguiente manera `/components/footer.astro`
 
-```Astro
+```astro
 ---
 const platform = 'github';
 const userName = 'rossyspike';
@@ -225,7 +225,7 @@ Como se puede tener multiples redes sociales, vamos a crear un componente reutil
 1. Crear el archivo `/components/social.astro`
 2. Escribir lo siguiente:
 
-```Astro
+```astro
 ---
 const { platform, username } = Astro.props;
 ---
@@ -234,7 +234,7 @@ const { platform, username } = Astro.props;
 
 3. Para usarlo, primero se importa y se colocan los `props` (propiedades) como atributos de la etiqueta `HTML`, quedando:
 
-```Astro
+```astro
 ---
 import Social from './social.astro'
 ---
@@ -245,7 +245,7 @@ import Social from './social.astro'
 
 Lo siguiente seria hacer un componente `header` que importe el componente de `navigation`, para esto hare el mismo proceso de antes asi que no lo detallare
 
-```Astro
+```astro
 ---
 import Navigation from './navigation.astro'
 ---
@@ -262,7 +262,7 @@ Siguiendo el tutorial de `Astro` nos mandaron a escribir css para la pagina, sin
 
 1. Crear componente `menu`
 
-```Astro
+```astro
 ---
 ---
 <button aria-expanded="false" aria-controls="main-menu" class="menu">
@@ -273,7 +273,7 @@ Siguiendo el tutorial de `Astro` nos mandaron a escribir css para la pagina, sin
 2. Agregarlo en el componente `Header` justo antes de `Navigation`
 3. Agregar etiqueta `script` en `index`:
 
-```Astro
+```astro
 ...
   <Footer />
   <script>
@@ -292,7 +292,7 @@ Siguiendo el tutorial de `Astro` nos mandaron a escribir css para la pagina, sin
 6. 2. copiar el codigo
 7. 3. Importarlo
 
-```Astro
+```astro
 ...
 	<body>
     <h1>{pageTitle}</h1>
@@ -314,7 +314,7 @@ Siguiendo el tutorial de `Astro` nos mandaron a escribir css para la pagina, sin
 2. Copiar contenido de `index.astro` al nuevo archivo
 3. Incluir `base_layout.astro` en `index.astro`
 
-```Astro
+```astro
 ---
 import BaseLayout from '../layouts/base_layout.astro';
 const pageTitle = "Notes";
@@ -340,9 +340,9 @@ const {pageTitle} = Astro.props
    NOTA:
    Conservando los estilos de tu página About
 
-Usar <BaseLayout> para renderizar tu página about.astro significa que perderás la etiqueta <style> agregada en el <head> de esta página. Para seguir aplicando estilos únicamente a nivel de página usando los estilos con alcance de Astro, mueve la etiqueta <style> al cuerpo del componente de la página. Esto te permitirá estilizar elementos creados en este componente de página (por ejemplo, tu lista de habilidades).
+Usar `<BaseLayout>` para renderizar tu página about.astro significa que perderás la etiqueta `<style>` agregada en el `<head>` de esta página. Para seguir aplicando estilos únicamente a nivel de página usando los estilos con alcance de Astro, mueve la etiqueta `<style>` al cuerpo del componente de la página. Esto te permitirá estilizar elementos creados en este componente de página (por ejemplo, tu lista de habilidades).
 
-Dado que tu <h1> ahora es creado por el componente plantilla, puedes agregar el atributo is:global a tu etiqueta de estilo para que afecte a todos los elementos de esta página, incluidos los creados por otros componentes: <style is:global define:vars={{ skillColor, fontWeight, textCase }}>
+Dado que tu `<h1>` ahora es creado por el componente plantilla, puedes agregar el atributo is:global a tu etiqueta de estilo para que afecte a todos los elementos de esta página, incluidos los creados por otros componentes: `<style is:global define:vars={{ skillColor, fontWeight, textCase }}>`
 
 ### Plantillas en entradas de blog
 
@@ -351,7 +351,7 @@ Al agregar la propiedad `layout` en el `frontmatter` de un archivo `.md`
 1. Crear el archivo `src/layouts/markdown_post_layout.astro`
 2. Escribir:
 
-```Astro
+```astro
 ---
 const { frontmatter } = Astro.props;
 ---
@@ -363,7 +363,7 @@ const { frontmatter } = Astro.props;
 
 3. En el archivo `src/pages/posts/1-introduccion.md` agregar:
 
-```Astro
+```astro
 ---
 layout: ../../layouts/markdown_post_layout.astro
 ---
@@ -373,7 +373,7 @@ layout: ../../layouts/markdown_post_layout.astro
 
 1. Importar `base_layout` en `markdown_post_layout`.
 
-```Astro
+```astro
 ---
 import BaseLayout from "./base_layout.astro";
 const { frontmatter } = Astro.props;
@@ -388,7 +388,7 @@ const { frontmatter } = Astro.props;
 
 1. en `blog.astro` escribir:
 
-```Astro
+```astro
 ---
 ...
 const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
@@ -411,7 +411,7 @@ Puedes crear conjuntos completos de páginas de forma dinámica utilizando archi
 1. Crear `src/pages/tags/[tag].astro`
 2. Escribir:
 
-```Astro
+```astro
 ---
 import BaseLayout from '../../layouts/base_layout.astro';
 
@@ -434,7 +434,7 @@ const { tag } = Astro.params;
 Sin embargo para poder navegar se necesitan agregar las entradas del blog, para esto se necesita agregar lo siguiente:
 `src/pages/tags/[tag].astro`
 
-```Astro
+```astro
 ---
 import BaseLayout from '../../layouts/base_layout.astro';
 import BlogPost from '../../components/blogpost.astro';
@@ -466,7 +466,7 @@ Para recibir información en la plantilla HTML de una ruta de página, escríbel
 
 Ahora, hay un problema con el codigo anterior, cada vez que querramos agregar una etiqueta debemos declararla en el arreglo, lo que vamos a cambiar ahora es que se obtengan las etiquetas directamente de cada archivo/post.
 
-```Astro
+```astro
 ---
 import BaseLayout from '../../layouts/base_layout.astro';
 import BlogPost from '../../components/blogpost.astro';
@@ -503,7 +503,7 @@ La idea es sencilla, simplemente es agregar una pagina que muestre los tags disp
 2. Una vez creada la pagina debemos agregar las etiquetas de forma dinamica
 3. Reutilizando el codigo de `src/pages/tags/[tag].astro` agregar dinamicamente las etiquetas, quedando:
 
-```Astro
+```astro
 ---
 import BaseLayout from '../../layouts/base_layout.astro'
 const pageTitle = 'Tags'
@@ -540,7 +540,7 @@ const uniqueTags = [...new Set(allPosts.map((post:any) => post.frontmatter.tags)
 
 4. Agregarlo en el componente `navigation.astro`
 
-```Astro
+```astro
 ---
 ---
 
@@ -554,7 +554,7 @@ const uniqueTags = [...new Set(allPosts.map((post:any) => post.frontmatter.tags)
 
 5. Y como reto lo agregare en `markdown_post_layout.astro` para que las tags sean enlaces
 
-```Astro
+```astro
 ---
 import BaseLayout from './base_layout.astro';
 const { frontmatter } = Astro.props;
@@ -639,7 +639,7 @@ export const collections = { blog };
 
 4. Crear `src/pages/posts/[...slug].astro` para poder generar cada pagina de blog individual porque los archivos `Markdown` y `MDX` dejan de convertirse en paginas (usando el enrutamiento basado en archivos de `Astro`) al ser usadas en colecciones `colecciones`. Con el siguiente codigo:
 
-```Astro
+```astro
 ---
 import { getCollection, render } from 'astro:content';
 // importar nuestro layout de post
@@ -668,7 +668,7 @@ const { Content } = await render(post);
    - `/src/pages/tags/index.astro`
      Ej:
 
-```Astro
+```astro
 ---
 import BaseLayout from '../../layouts/base_layout.astro'
 import {getCollection} from 'astro:content';

@@ -1,9 +1,6 @@
 import { z } from "astro/zod";
-import { appendFileSync } from "node:fs"; // Import nativo ESM que Node entiende sin require
+import { appendFileSync } from "node:fs";
 import { blogSchema } from '../../src/schemas/blog.ts'
-declare function require(name: string): {
-  appendFileSync: (file: string, data: string | Uint8Array, options?: string | { encoding?: string | null; mode?: number | string; flag?: string }) => void;
-};
 
 
 type CollectionData = {
@@ -66,7 +63,7 @@ try {
 
   }
   appendFileSync(filePath, '---\n');
-  console.log(`file succesfully written to: ${filePath}`)
+  console.log(`file successfully written to: ${filePath}`)
 
 } catch (e) {
   console.log(`${e}`);
